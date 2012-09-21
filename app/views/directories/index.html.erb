@@ -1,0 +1,18 @@
+<% @directories.each do |directory| %>
+		<%= link_to directory.name, directory %><br>
+		<% directory.images.each do |image| %>
+			<%= image_tag image.picture.url(:thumb), :class => "image" %> 
+		<% end %>
+		<% if isLoggedIn? %>
+			(
+  		<%= link_to 'Edit', edit_directory_path(directory) %>
+  		<%= link_to 'Destroy', directory, confirm: 'Are you sure?', method: :delete %>
+			)	
+		<% end %>
+	<br>
+<% end %>
+
+<br />
+<% if isLoggedIn? %>
+	<%= link_to 'New Directory', new_directory_path %>
+<% end %>

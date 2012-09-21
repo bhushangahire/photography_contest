@@ -1,0 +1,22 @@
+<table>
+<tr>
+<% @images.each do |image| %>
+<td>
+		<div class="imagebox">
+			<%= link_to image_tag(image.picture.url(:medium), :class => "image"),  image %>
+			<div class="imagetext">
+				<%= image.title %>
+				<br>
+				<%= image.description %>
+				<br>
+				<% if image.user == current_user %>	
+					<%= link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete %>
+				<% end %>
+			</div>
+	</div>
+</td>
+<% end %>
+</tr>
+</table>
+
+

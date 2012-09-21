@@ -1,0 +1,21 @@
+<% if notice %>
+	<p id="notice"><%= notice %></p>
+<% end %>
+<p>
+  <b>Name:</b>
+  <%= @directory.name %>
+</p>
+	<% @directory.images.each do |image| %>
+		<%= image.title %><br>	
+
+		<div class="show">
+			<a href="<%= image.picture.url %>" title=<%= image.title %> >
+				<%= image_tag image.picture.url(:medium), :class => "image" %> 
+			</a>
+		</div>
+	<% end %>
+
+<% unless isLoggedIn? %>
+	<%= link_to 'Edit', edit_directory_path(@directory) %> |
+	<%= link_to 'Back', directories_path %>
+<% end %>
