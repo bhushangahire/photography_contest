@@ -43,6 +43,7 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(params[:image])
 		@image.directory_id = 1
+    @image.user = current_user
     respond_to do |format|
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
@@ -80,4 +81,20 @@ class ImagesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def like_dislike
+    @image = Image.find(params[:id])
+
+    if params[:type] == "like"
+      # @image.liked_by = current_user
+      @image.vote :voter => current_user, :vote => 'like'
+
+    else
+      @image.downvote_from = current_user
+    end
+    respond_to do |format|
+      format.json { head :ok }
+    end
+  end
+
 end

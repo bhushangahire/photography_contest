@@ -51,7 +51,8 @@
 		<%= EXIFR::JPEG.new(@image.picture.path).aperture_value.to_s%>
 	</div>
 </div>
-<% if isLoggedIn? %>
+<% if current_user.admin? %>
+	<%= link_to 'Delete', image_path(@image), :confirm => "are you sure?", :method => :delete %> |
 	<%= link_to 'Edit', edit_image_path(@image) %> |
 	<%= link_to 'Back', images_path %>
 <% end %>

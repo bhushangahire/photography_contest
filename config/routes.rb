@@ -19,7 +19,11 @@ Photo::Application.routes.draw do
 	
 
 	# resources :users
-  resources :images
+  resources :images do
+    member do
+      post 'like_dislike'
+    end
+  end
 	
 	
 

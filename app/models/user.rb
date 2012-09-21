@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
 
 	acts_as_voter
 
+  def admin?
+    email == "bhushan.ahire@synechron.com"
+  end
+
 end
