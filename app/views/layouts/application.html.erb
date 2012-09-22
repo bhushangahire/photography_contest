@@ -13,6 +13,7 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
 
     <!-- For third-generation iPad with high-resolution Retina display: -->
     <!-- Size should be 144 x 144 pixels -->
@@ -41,10 +42,12 @@
         <div class="container-fluid">          
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <li><a class="brand" href="#">Home</a></li>
+              <li><a class="brand" href="<%= root_path %>">Home</a></li>
+              <% if current_user %>
               <li><%= link_to "Photos", "/images"  %></li>
               <% unless current_user.images.length > 0 %><li><%= link_to "Upload Photo", new_image_path  %></li><% end %>
-              <li><% if current_user %><%= link_to "Sign Out", destroy_user_session_path %> <% else %> <%= link_to "Sign In", new_user_session_path %> <% end %></li>
+              <% end %>
+              <li><% if current_user %><%= link_to "Sign out", destroy_user_session_path, :method => :delete %> <% else %> <%= link_to "Sign In", new_user_session_path %> <% end %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

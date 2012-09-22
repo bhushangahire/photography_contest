@@ -8,4 +8,5 @@
 //= require fancybox
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require jquery.prettyPhoto
 //= require_tree .

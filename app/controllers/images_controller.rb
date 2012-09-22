@@ -1,7 +1,6 @@
 class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
-	skip_before_filter :authorize
   def index
     @images = Image.all
 

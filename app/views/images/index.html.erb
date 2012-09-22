@@ -1,9 +1,15 @@
+<style type="text/css">
+form {
+	float: left;
+    width: 60px;
+}
+</style>
 <table>
 <tr>
 <% @images.each do |image| %>
 <td>
 		<div class="imagebox">
-			<%= link_to image_tag(image.picture.url(:medium), :class => "image"),  image %>
+			<%= link_to image_tag(image.picture.url(:medium), :class => "image"), image.picture.url, :rel=>"prettyPhoto[pp_gal]", :title => image.title %>
 			<div class="imagetext">
 				<%= image.title %>
 				<br>
@@ -13,7 +19,7 @@
 					<%= link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete %><br/>
 				<% end %>
 				<% if current_user.voted_for? image %>
-					<strong>Like : <%= image.likes.size %>,  Dislike : <%= image.dislikes.size %>,   Total : <%= image.votes.size %></strong>
+					<div style="height: 40px;"> <strong>Like : <%= image.likes.size %>,  Dislike : <%= image.dislikes.size %>,   Total : <%= image.votes.size %></strong></div>
 				<% else %>
 				<div class="btn-group" data-toggle="buttons-radio">
 					<%= button_to "Like", {:action => "like_dislike", :id => image.id, :type => "like" }, :remote => true, :form => { "data-type" => "json" }, :class => "btn" %>
@@ -27,4 +33,12 @@
 </tr>
 </table>
 
+<script type="text/javascript" charset="utf-8">
 
+$(function() {
+  // ...
+  $("a[rel^='prettyPhoto']").prettyPhoto();
+});
+
+
+</script>

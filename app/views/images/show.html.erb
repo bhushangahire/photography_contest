@@ -1,6 +1,9 @@
-<% if notice %>
-	<p id="notice"><%= notice %></p>
-<% end %>
+<style type="text/css">
+form {
+	float: left;
+    width: 60px;
+}
+</style>
 <div class="show">
 	<a href="<%= @image.picture.url %>" title=<%= @image.title %> >
 		<%= image_tag @image.picture.url(:medium), :class => "image" %> 
@@ -26,29 +29,39 @@
 	<b>Photographer</b>
 	<%= @image.photographer %>
 </p>
-	
-<div class="exif" id="exif_<%=@image.id%>" >Exif
+<p>
+<% if current_user.voted_for? @image %>
+	<div style="height: 40px;"> <strong>Like : <%= @image.likes.size %>,  Dislike : <%= @image.dislikes.size %>,   Total : <%= @image.votes.size %></strong></div>
+<% else %>
+<div class="btn-group" data-toggle="buttons-radio">
+	<%= button_to "Like", {:action => "like_dislike", :id => @image.id, :type => "like" }, :remote => true, :form => { "data-type" => "json" }, :class => "btn" %>
+	<%= button_to "Dislike", {:action => "like_dislike", :id => @image.id, :type => "dislike"}, :remote => true, :form => { "data-type" => "json" }, :class => "btn" %>
+</div>
+<% end %>
+</p>
+<div style="clear:both"></div>
+<div class="exif" id="exif_<%=@image.id%>" ><strong>Exif</strong>
 	<div class="exifdata ">
 		Cameramodel:
-		<%= EXIFR::JPEG.new(@image.picture.path).model %>
+		<%= EXIFR::JPEG.new(@image.picture.path).model rescue "N/A" %>
 		<br>
 		Date:
-		<%= EXIFR::JPEG.new(@image.picture.path).date_time  %>
+		<%= EXIFR::JPEG.new(@image.picture.path).date_time rescue "N/A"  %>
 		<br>
 		Exposure:
-		<%= EXIFR::JPEG.new(@image.picture.path).exposure_time.to_s  %>
+		<%= EXIFR::JPEG.new(@image.picture.path).exposure_time.to_s rescue "N/A"  %>
 		<br>
 		Width:
-		<%= EXIFR::JPEG.new(@image.picture.path).width %>
+		<%= EXIFR::JPEG.new(@image.picture.path).width rescue "N/A" %>
 		<br>
 		Height:
-		<%= EXIFR::JPEG.new(@image.picture.path).height  %>
+		<%= EXIFR::JPEG.new(@image.picture.path).height rescue "N/A"  %>
 		<br>					
 		Shutter:
-		<%= EXIFR::JPEG.new(@image.picture.path).shutter_speed_value.to_s%>
+		<%= EXIFR::JPEG.new(@image.picture.path).shutter_speed_value.to_s rescue "N/A"%>
 		<br>					
 		Aperture:
-		<%= EXIFR::JPEG.new(@image.picture.path).aperture_value.to_s%>
+		<%= EXIFR::JPEG.new(@image.picture.path).aperture_value.to_s rescue "N/A"%>
 	</div>
 </div>
 <% if current_user.admin? %>
