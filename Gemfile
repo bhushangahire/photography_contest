@@ -5,7 +5,16 @@ gem 'rails', '3.1.3'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+group :development do
+  # Pretty printed test output
+  #gem 'sqlite3'
+end
+
+group :production do
+  # Pretty printed test output
+  gem 'pg'
+end
+
 #gem 'mysql2'
 #gem 'mongrel', '>= 1.2.0.beta'
 gem "paperclip", "~> 2.4"

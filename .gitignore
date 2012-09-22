@@ -19,3 +19,4 @@
 /log/*.log
 /tmp
 /public/system/pictures/**/*
+/public/assets
