@@ -87,12 +87,8 @@ class ImagesController < ApplicationController
     if params[:type] == "like"
       # @image.liked_by = current_user
       @image.vote :voter => current_user, :vote => 'like'
-
     else
       @image.downvote_from = current_user
-    end
-    respond_to do |format|
-      format.json { head :ok }
     end
   end
 
