@@ -1,2 +1,20 @@
-<h1>Home#index</h1>
-<p>Home</p>
+<div class="details">
+	<h3>Welcome <%= current_user.name %> to Synechron Photography Contest</h3>
+        <dl>
+          <dt>Entry Start: 01/10/2012</dd>
+          <dt>Entry Close: 20/10/2013</dd>
+        </dl><p>Are you an amateur photographer or a photography enthusiast? If so, then this is the competition for you!<strong>&nbsp;</strong></p>
+<p>Submit your best shot clicked in year 2012. As a <strong>Member</strong>, you can <strong>enter only 1 photograph.</strong></p>
+<p>Photographers of all ages, backgrounds and experience levels are invited to enter this competition where great imagery is everything, and creativity is the key ingredient!</p>
+
+<p>Photographs taken by mobile not allowed.</p>
+<p>Please make sure the image you upload should be min <strong>3264x2448</strong> resolution.</p>
+<br/>
+
+<p>
+	<% if current_user %>              
+	  <% unless current_user.images.length > 0 %><li><%= link_to "Enter contest", new_image_path  %></li><% end %>
+	<% end %>
+</p>
+
+</div>

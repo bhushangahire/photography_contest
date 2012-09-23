@@ -29,7 +29,7 @@ Photo::Application.routes.draw do
 
   get "home/index"
 	
-	root :to => "images#index"
+	root :to => "home#index"
 	
 
   # The priority is based upon order of creation:

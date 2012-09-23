@@ -1,18 +1,58 @@
 <% @directories.each do |directory| %>
 		<%= link_to directory.name, directory %><br>
 		<% directory.images.each do |image| %>
-			<%= image_tag image.picture.url(:thumb), :class => "image" %> 
+			
+			<div class="imagebox">
+				<%= link_to image_tag(image.picture.url(:medium), :class => "image"), image.picture.url, :rel=>"prettyPhoto[pp_gal]", :title => image.title %>
+				<div class="imagetext">
+					<%= image.title %>
+					<br>
+					<%= image.description %>
+					<br>
+					<% if current_user.admin? %>	
+						<%= link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete %><br/>
+					<% end %>
+					
+					<div id="like_dislike_<%= image.id %>">
+						<%= render :partial => "images/like_dislike", :locals => {:image => image} %>
+					</div>
+
+					<div class="exif" id="exif_<%=image.id%>" ><strong>Exif</strong>
+						<div class="exifdata ">
+							Cameramodel:
+							<%= EXIFR::JPEG.new(image.picture.path).model rescue "N/A" %>
+							<br>
+							Date:
+							<%= EXIFR::JPEG.new(image.picture.path).date_time rescue "N/A"  %>
+							<br>
+							Exposure:
+							<%= EXIFR::JPEG.new(image.picture.path).exposure_time.to_s rescue "N/A"  %>
+							<br>											
+							Shutter:
+							<%= EXIFR::JPEG.new(image.picture.path).shutter_speed_value.to_s rescue "N/A"%>
+							<br>					
+							Aperture:
+							<%= EXIFR::JPEG.new(image.picture.path).aperture_value.to_s rescue "N/A"%>
+						</div>
+					</div>
+				    
+				</div>
+			</div>
+
+
+
+
+
 		<% end %>
-		<% if isLoggedIn? %>
+		<% if current_user.admin? %>
 			(
   		<%= link_to 'Edit', edit_directory_path(directory) %>
   		<%= link_to 'Destroy', directory, confirm: 'Are you sure?', method: :delete %>
 			)	
 		<% end %>
-	<br>
 <% end %>
 
 <br />
-<% if isLoggedIn? %>
-	<%= link_to 'New Directory', new_directory_path %>
+<% if current_user.admin? %>
+	<%= link_to 'New Contest', new_directory_path %>
 <% end %>

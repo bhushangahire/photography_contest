@@ -1,8 +1,5 @@
-<% if notice %>
-	<p id="notice"><%= notice %></p>
-<% end %>
 <p>
-  <b>Name:</b>
+  <b>Contest :</b>
   <%= @directory.name %>
 </p>
 	<% @directory.images.each do |image| %>
@@ -15,7 +12,7 @@
 		</div>
 	<% end %>
 
-<% unless isLoggedIn? %>
+<% unless current_user.admin? %>
 	<%= link_to 'Edit', edit_directory_path(@directory) %> |
 	<%= link_to 'Back', directories_path %>
 <% end %>
