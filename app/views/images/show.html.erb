@@ -30,7 +30,7 @@ form {
 	<%= @image.photographer %>
 </p>
 <div id="like_dislike">
-	<%= render :partial => "like_dislike", :locals => {:image => image} %>
+	<%= render :partial => "like_dislike", :locals => {:image => @image} %>
 </div>
 <div style="clear:both"></div>
 <div class="exif" id="exif_<%=@image.id%>" ><strong>Exif</strong>
