@@ -22,9 +22,29 @@ form {
 				<div id="like_dislike_<%= image.id %>">
 					<%= render :partial => "like_dislike", :locals => {:image => image} %>
 				</div>
+
+				<div class="exif" id="exif_<%=image.id%>" ><strong>Exif</strong>
+					<div class="exifdata ">
+						Cameramodel:
+						<%= EXIFR::JPEG.new(image.picture.path).model rescue "N/A" %>
+						<br>
+						Date:
+						<%= EXIFR::JPEG.new(image.picture.path).date_time rescue "N/A"  %>
+						<br>
+						Exposure:
+						<%= EXIFR::JPEG.new(image.picture.path).exposure_time.to_s rescue "N/A"  %>
+						<br>											
+						Shutter:
+						<%= EXIFR::JPEG.new(image.picture.path).shutter_speed_value.to_s rescue "N/A"%>
+						<br>					
+						Aperture:
+						<%= EXIFR::JPEG.new(image.picture.path).aperture_value.to_s rescue "N/A"%>
+					</div>
+				</div>
 			    
 			</div>
-	</div>
+		</div>
+
 </td>
 <% end %>
 </tr>
