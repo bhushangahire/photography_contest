@@ -1,0 +1,1 @@
+$("#like_dislike_<%= @image.id %>").html("<%= escape_javascript(render(:partial => 'like_dislike', :locals => {:image => @image}))%>");
