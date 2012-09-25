@@ -6,4 +6,10 @@ class Image < ActiveRecord::Base
 
 	acts_as_votable
 
+	validates :title, :description, :photographer, :presence => true
+	
+	validates_attachment_presence :picture
+
+
+
 end
