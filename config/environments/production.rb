@@ -21,7 +21,7 @@ Photo::Application.configure do
   config.assets.digest = true
 
   # Defaults to Rails.root.join("public/assets")
-  config.assets.manifest = 'public/manifest'
+  # config.assets.manifest = 'public/manifest'
 
   config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif] 
 
